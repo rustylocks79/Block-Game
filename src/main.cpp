@@ -1,12 +1,13 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "Shader.h"
-#include "Chunk.h"
-#include "vec4.hpp"
-#include "fwd.hpp"
+#include <iostream>
 #include "ext/matrix_transform.hpp"
 
-#include <iostream>
+#include "Shader.h"
+#include "Chunk.h"
+
+using namespace std;
+using namespace glm;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -37,19 +38,29 @@ int main() {
         return -1;
     }
 
+    glEnable(GL_DEPTH_TEST);
+
     //TODO: figure out relative paths. Moving shaders near exe.
     Shader shader(R"(C:\CompSci\Block Game\src\vertex.glsl)", R"(C:\CompSci\Block Game\src\frag.glsl)");
     Chunk chunk;
 
+    mat4 model = mat4(1.0f);
+    mat4 view = mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    mat4 proj = perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
+//    mat4 proj = mat4(1.0f);
+
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
-        shader.SetMat4("model", glm::mat4(1.0f));
-        shader.SetMat4("view", glm::mat4(1.0f));
-        shader.SetMat4("projection", glm::mat4(1.0f));
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        model = glm::rotate(model, glm::radians(-0.1f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+        shader.SetMat4("model", model);
+        shader.SetMat4("view",view);
+        shader.SetMat4("projection", proj);
 
         shader.Use();
         chunk.render();
