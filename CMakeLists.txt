@@ -12,7 +12,10 @@ include_directories(glfw/include)
 # Including GLAD
 include_directories(glad/include)
 
-set(SOURCE_FILES src/main.cpp glad/src/glad.c src/Shader.cpp src/Shader.h)
+# Including GLM
+include_directories(glm/glm)
+
+set(SOURCE_FILES src/main.cpp glad/src/glad.c src/Shader.cpp src/Shader.h src/Chunk.cpp src/Chunk.h)
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
 
