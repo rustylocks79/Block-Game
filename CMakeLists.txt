@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3)
-project(LearnOpenGL-CLion)
+project(Block-Game)
 
 find_package(OpenGL REQUIRED)
 
@@ -12,7 +12,7 @@ include_directories(glfw/include)
 # Including GLAD
 include_directories(glad/include)
 
-set(SOURCE_FILES main.cpp glad/src/glad.c)
+set(SOURCE_FILES src/main.cpp glad/src/glad.c src/Shader.cpp src/Shader.h)
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
 
