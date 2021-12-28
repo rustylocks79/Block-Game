@@ -9,5 +9,6 @@ private:
 
 public:
     Texture(const char* filePath);
+    ~Texture();
     void Use() const;
 };

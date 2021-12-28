@@ -45,7 +45,12 @@ Texture::Texture(const char *filePath) {
     glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
 }
 
+Texture::~Texture() {
+    glDeleteTextures(1, &_id);
+}
+
 void Texture::Use() const {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _id);
 }
+

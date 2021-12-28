@@ -69,7 +69,7 @@ int main() {
         shader.SetMat4("view",view);
         shader.SetMat4("projection", proj);
         texture.Use();
-        chunk.render();
+        chunk.Render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
