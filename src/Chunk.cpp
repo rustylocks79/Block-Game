@@ -21,6 +21,9 @@ Chunk::Chunk() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    glVertexAttribPointer(2, 1, GL_INT, GL_FALSE, stride, (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
@@ -36,45 +39,53 @@ void Chunk::render() const {
 }
 
 void Chunk::AddCube(vec3 center) {
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 0.0f));
+    //back
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 0.0f), 0);
 
-    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f));
+    //front
+    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f), 0);
 
-    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(1.0f, 0.0f));
+    //left
+    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(1.0f, 0.0f), 0);
 
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f));
+    //right
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(0.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f), 0);
 
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f));
+    //down
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f, -0.5f),  vec2(1.0f, 1.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(0.5f, -0.5f,  0.5f),  vec2(1.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f,  0.5f), vec2(0.0f, 0.0f), 0);
+    vertices.emplace_back(vec3(-0.5f, -0.5f, -0.5f), vec2(0.0f, 1.0f), 0);
 
-    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(0.0f, 0.0f));
-    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f));
+    //up
+    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f), 1);
+    vertices.emplace_back(vec3(0.5f,  0.5f, -0.5f),  vec2(1.0f, 1.0f), 1);
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f), 1);
+    vertices.emplace_back(vec3(0.5f,  0.5f,  0.5f),  vec2(1.0f, 0.0f), 1);
+    vertices.emplace_back(vec3(-0.5f,  0.5f,  0.5f), vec2(0.0f, 0.0f), 1);
+    vertices.emplace_back(vec3(-0.5f,  0.5f, -0.5f), vec2(0.0f, 1.0f), 1);
 }
+
+Vertex::Vertex(const vec3 &position, const vec2 &uv, int layer) : position(position), uv(uv), layer(layer) {}

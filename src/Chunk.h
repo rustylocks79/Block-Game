@@ -8,8 +8,9 @@
 struct Vertex {
     glm::vec3 position;
     glm::vec2 uv;
+    int layer;
 
-    Vertex(const glm::vec3 &position, const glm::vec2 &uv) : position(position), uv(uv) {}
+    Vertex(const glm::vec3 &position, const glm::vec2 &uv, int layer);
 };
 
 class Chunk {
