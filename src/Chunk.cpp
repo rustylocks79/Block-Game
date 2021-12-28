@@ -12,10 +12,11 @@ Chunk::Chunk() {
     for(int i = 0; i < LENGTH_X * LENGTH_Y * LENGTH_Z; i++) {
         blockData[i] = 0;
     }
-    SetBlockAtPos(0, 0, 0, 1);
-    SetBlockAtPos(1, 0, 0, 1);
-    SetBlockAtPos(0, 0, 1, 1);
-    SetBlockAtPos(1, 0, 1, 1);
+    for(int z = 0; z < LENGTH_Z; z++) {
+        for(int x = 0; x < LENGTH_X; x++) {
+            SetBlockAtPos(x, 0, z, 1);
+        }
+    }
     BuildMesh();
 
     glGenVertexArrays(1, &_vao);
@@ -111,18 +112,15 @@ unsigned int Chunk::GetBlockAtPos(int x, int y, int z, Direction direction) cons
 }
 
 void Chunk::BuildMesh() {
-    int cubes = 0;
     for(int y = 0; y < LENGTH_Y; y++) {
         for(int z = 0; z < LENGTH_Z; z++) {
             for(int x = 0; x < LENGTH_X; x++) {
                 if(GetBlockAtPos(x, y, z) != 0) {
                     AddCube(vec3(x, y, z));
-                    cubes++;
                 }
             }
         }
     }
-    cout << cubes << endl;
 }
 
 void Chunk::AddCube(glm::vec3 blockPos) {
