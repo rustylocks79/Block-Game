@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 #include "glad/glad.h"
 #include "vec3.hpp"
@@ -15,9 +16,9 @@ struct Vertex {
 
 class Chunk {
 private:
-    unsigned int _vao, _vbo;
-    std::vector<Vertex> vertices;
-
+    unsigned int _vao, _vbo, _ebo;
+    std::vector<Vertex>* vertices;
+    std::vector<unsigned int>* indices;
     void AddCube(glm::vec3 center);
 public:
     Chunk();
